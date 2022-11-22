@@ -12,11 +12,22 @@ namespace MartinHobesaluChairMeditation.Controllers
 {
     public class ChairMeditationsController : Controller
     {
+
         private readonly ApplicationDbContext _context;
 
         public ChairMeditationsController(ApplicationDbContext context)
         {
             _context = context;
+        }
+        public async Task<IActionResult> AddPrice([Bind("Id,Tone,OrderAmount,CompleteAmount,Price")] ChairMeditation chairMeditation)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(chairMeditation);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(chairMeditation);
         }
 
         // GET: ChairMeditations
