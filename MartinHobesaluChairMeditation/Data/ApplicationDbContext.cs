@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MartinHobesaluChairMeditation.Models;
 
 namespace MartinHobesaluChairMeditation.Data
 {
@@ -9,5 +10,6 @@ namespace MartinHobesaluChairMeditation.Data
             : base(options)
         {
         }
+        public DbSet<MartinHobesaluChairMeditation.Models.ChairMeditation> ChairMeditation { get; set; }
     }
 }
