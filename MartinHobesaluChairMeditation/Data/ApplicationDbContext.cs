@@ -11,5 +11,6 @@ namespace MartinHobesaluChairMeditation.Data
         {
         }
         public DbSet<MartinHobesaluChairMeditation.Models.ChairMeditation> ChairMeditation { get; set; }
+        public DbSet<MartinHobesaluChairMeditation.Models.Order> Order { get; set; }
     }
 }
