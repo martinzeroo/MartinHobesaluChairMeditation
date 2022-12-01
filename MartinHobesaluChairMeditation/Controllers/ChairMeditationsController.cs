@@ -47,6 +47,7 @@ namespace MartinHobesaluChairMeditation.Controllers
             var chairMeditation = await _context.ChairMeditation
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (chairMeditation == null)
+
             {
                 return NotFound();
             }
