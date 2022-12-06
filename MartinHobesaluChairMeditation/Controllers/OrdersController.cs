@@ -25,6 +25,15 @@ namespace MartinHobesaluChairMeditation.Controllers
               return View(await _context.Order.ToListAsync());
         }
 
+        public async Task<IActionResult> TableStatus()
+        {
+            
+
+
+
+            return View(await _context.Order.ToListAsync());
+        }
+
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
