@@ -23,6 +23,11 @@ namespace MartinHobesaluChairMeditation.Controllers
         public async Task<IActionResult> Index()
         {
               return View(await _context.Order.ToListAsync());
+
+        }
+        public async Task<IActionResult> CompletedAmount()
+        {
+            return View(await _context.Order.ToListAsync());
         }
 
         public async Task<IActionResult> TableStatus()

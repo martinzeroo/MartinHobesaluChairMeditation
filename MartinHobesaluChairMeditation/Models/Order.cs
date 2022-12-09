@@ -6,6 +6,8 @@
 
         public string? Tone { get; set; }
 
+        public int CompletedAmount { get; set; }
+
         public int OrderAmount { get; set; }
 
         public DateTime TimeOfArrival { get; set; }
