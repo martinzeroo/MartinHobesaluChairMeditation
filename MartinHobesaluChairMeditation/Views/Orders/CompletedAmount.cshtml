@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Tone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CompletedAmount)
+                    @Html.DisplayFor(modelItem => item.CompletedAmount)  <a asp-action="IncreaseCompletedAmount" asp-route-id="@item.Id" >Increase By 1</a> 
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderAmount)

@@ -72,14 +72,26 @@ namespace MartinHobesaluChairMeditation.Controllers
             }
             return View(order);
         }
+        
+        public async Task<IActionResult> IncreaseCompletedAmount(int id)
+        {
+            var order = _context.Order.FirstOrDefault(x => x.Id == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            order.CompletedAmount++;
+            await _context.SaveChangesAsync();
+            return View("CompletedAmount",await _context.Order.ToListAsync());
 
+        }
         // GET: Orders/Create
 
         // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 
-        
+
 
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
