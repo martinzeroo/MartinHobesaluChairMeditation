@@ -23,7 +23,6 @@ namespace MartinHobesaluChairMeditation.Controllers
         public async Task<IActionResult> Index()
         {
               return View(await _context.Order.ToListAsync());
-
         }
         public async Task<IActionResult> CompletedAmount()
         {
@@ -32,13 +31,9 @@ namespace MartinHobesaluChairMeditation.Controllers
 
         public async Task<IActionResult> TableStatus()
         {
-            
-
-
-
             return View(await _context.Order.ToListAsync());
         }
-
+        
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -57,8 +52,7 @@ namespace MartinHobesaluChairMeditation.Controllers
             return View(order);
         }
 
-        // GET: Orders/Create
-        public IActionResult Create()
+        public IActionResult OrderCreate()
         {
             return View();
         }
@@ -68,16 +62,24 @@ namespace MartinHobesaluChairMeditation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Tone,OrderAmount,TimeOfArrival,Price")] Order order)
+        public async Task<IActionResult> OrderCreate([Bind("Id,Tone,CompletedAmount,OrderAmount,TimeOfArrival,Price")] Order order)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CompletedAmount));
             }
             return View(order);
         }
+
+        // GET: Orders/Create
+
+        // POST: Orders/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        
 
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)

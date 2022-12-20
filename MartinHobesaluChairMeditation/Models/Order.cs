@@ -6,7 +6,7 @@
 
         public string? Tone { get; set; }
 
-        public int CompletedAmount { get; set; }
+        public int CompletedAmount { get; set; } = 0;
 
         public int OrderAmount { get; set; }
 
