@@ -76,18 +76,13 @@ namespace MartinHobesaluChairMeditation.Controllers
         public async Task<IActionResult> IncreaseCompletedAmount(int id)
         {
             var order = _context.Order.FirstOrDefault(x => x.Id == id);
-
-            if (order.CompletedAmount < order.OrderAmount)
+            if (order == null)
             {
-                if (order == null)
-                {
-                    return NotFound();
-                }
-                order.CompletedAmount++;
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            return View("CompletedAmount", await _context.Order.ToListAsync());
-
+            order.CompletedAmount++;
+            await _context.SaveChangesAsync();
+            return View("CompletedAmount",await _context.Order.ToListAsync());
 
         }
         // GET: Orders/Create
@@ -183,7 +178,7 @@ namespace MartinHobesaluChairMeditation.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(CompletedAmount));
+            return RedirectToAction(nameof(Index));
         }
 
         private bool OrderExists(int id)
