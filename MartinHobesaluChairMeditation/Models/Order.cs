@@ -8,7 +8,6 @@ namespace MartinHobesaluChairMeditation.Models
 
         public string? Tone { get; set; }
         [Display(Name = "Completed Amount")]
-
         public int CompletedAmount { get; set; } = 0;
         [Display(Name = "Order Amount")]
         [Range (1,200)]

@@ -19,10 +19,7 @@
                 @Html.DisplayNameFor(model => model.OrderAmount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TimeOfArrival)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.CompletedAmount)
             </th>
             <th></th>
         </tr>
@@ -37,10 +34,7 @@
                 @Html.DisplayFor(modelItem => item.OrderAmount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TimeOfArrival)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.CompletedAmount)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

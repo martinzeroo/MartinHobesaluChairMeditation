@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MartinHobesaluChairMeditation.Data;
 using MartinHobesaluChairMeditation.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MartinHobesaluChairMeditation.Controllers
 {
@@ -24,6 +25,8 @@ namespace MartinHobesaluChairMeditation.Controllers
         {
               return View(await _context.Order.ToListAsync());
         }
+
+        [Authorize]
         public async Task<IActionResult> CompletedAmount()
         {
             return View(await _context.Order.ToListAsync());
@@ -72,7 +75,7 @@ namespace MartinHobesaluChairMeditation.Controllers
             }
             return View(order);
         }
-        
+        [Authorize]
         public async Task<IActionResult> IncreaseCompletedAmount(int id)
         {
             var order = _context.Order.FirstOrDefault(x => x.Id == id);
@@ -83,7 +86,7 @@ namespace MartinHobesaluChairMeditation.Controllers
                 {
                     return NotFound();
                 }
-                order.CompletedAmount++;
+                order.CompletedAmount++; 
                 await _context.SaveChangesAsync();
             }
             return View("CompletedAmount", await _context.Order.ToListAsync());
