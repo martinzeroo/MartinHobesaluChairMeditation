@@ -76,6 +76,7 @@ namespace MartinHobesaluChairMeditation.Controllers
             return View(order);
         }
         [Authorize]
+        
         public async Task<IActionResult> IncreaseCompletedAmount(int id)
         {
             var order = _context.Order.FirstOrDefault(x => x.Id == id);

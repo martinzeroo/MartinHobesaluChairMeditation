@@ -10,7 +10,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => { options.SignIn.RequireConfirmedAccount = true; options.SignIn.RequireConfirmedEmail = false; }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
 
@@ -37,15 +37,15 @@ foreach (var roleName in roleNames)
 }
 
 //Here you could create a super user who will maintain the web app
-var poweruser = new IdentityUser
+var poweruser = new IdentityUser()
 {
 
-    UserName = builder.Configuration["UserName"],
-    Email = builder.Configuration["UserEmail"],
+    UserName = builder.Configuration.GetSection("AdminUser")["UserName"],
+    Email = builder.Configuration.GetSection("AdminUser")["UserEmail"],
 };
 //Ensure you have these values in your appsettings.json file
-string userPWD = builder.Configuration["UserPassword"];
-var _user = await UserManager.FindByEmailAsync(builder.Configuration["AdminUserEmail"]);
+string userPWD = builder.Configuration.GetSection("AdminUser")["UserPassword"];
+var _user = await UserManager.FindByEmailAsync(builder.Configuration.GetSection("AdminUser")["AdminUserEmail"]);
 
 if (_user == null)
 {
