@@ -1,10 +1,5 @@
 ﻿@model IEnumerable<MartinHobesaluChairMeditation.Models.Order>
 
-@{
-    ViewData["Title"] = "Table Status";
-}
-
-<h1>Table Status</h1>
 <table class="table">
     <thead>
         <tr>
@@ -12,10 +7,16 @@
                 @Html.DisplayNameFor(model => model.Tone)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.CompletedAmount)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.OrderAmount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CompletedAmount)
+                @Html.DisplayNameFor(model => model.TimeOfArrival)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
             </th>
             <th></th>
         </tr>
@@ -26,11 +27,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Tone)
             </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.CompletedAmount)
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderAmount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CompletedAmount)
+                @Html.DisplayFor(modelItem => item.TimeOfArrival)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
         </tr>
 }

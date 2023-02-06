@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MartinHobesaluChairMeditation.Data;
 using MartinHobesaluChairMeditation.Models;
 using Microsoft.AspNetCore.Authorization;
+using MartinHobesaluChairMeditation.Models.ViewModels;
 
 namespace MartinHobesaluChairMeditation.Controllers
 {
@@ -20,16 +21,47 @@ namespace MartinHobesaluChairMeditation.Controllers
             _context = context;
         }
 
-        // GET: Orders
-        public async Task<IActionResult> Index()
-        {
-              return View(await _context.Order.ToListAsync());
-        }
-
         [Authorize]
         public async Task<IActionResult> CompletedAmount()
         {
             return View(await _context.Order.ToListAsync());
+        }
+
+        [Authorize (Roles = "Admin")]
+        public async Task<IActionResult> CompletedOrdersAsync()
+        {
+
+
+            var completedOrders = await _context.Order
+                .Where(r => r.CompletedAmount.Equals(r.OrderAmount))
+                .ToListAsync();
+
+            var completedAmount = await _context.Order
+                .Where(r => r.CompletedAmount.Equals(r.OrderAmount))
+                .CountAsync();
+
+
+            int totalOrders = _context.Order.Count();
+
+            int totalCompletedOrders = _context.Order
+                .Where(r => r.CompletedAmount.Equals(r.OrderAmount))
+                .Count();
+
+
+
+
+
+
+
+
+            var result = new CompletedOrdersViewModel()
+            {
+                CompletedOrders = completedOrders,
+                TotalOrders = totalOrders,
+                TotalCompletedOrders = totalCompletedOrders
+            };
+
+            return View(result);
         }
 
         public async Task<IActionResult> TableStatus()
@@ -102,6 +134,8 @@ namespace MartinHobesaluChairMeditation.Controllers
 
 
         // GET: Orders/Edit/5
+
+        [Authorize (Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Order == null)
@@ -120,6 +154,7 @@ namespace MartinHobesaluChairMeditation.Controllers
         // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Tone,OrderAmount,TimeOfArrival,Price")] Order order)
@@ -147,12 +182,13 @@ namespace MartinHobesaluChairMeditation.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(TableStatus));
             }
             return View(order);
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Order == null)

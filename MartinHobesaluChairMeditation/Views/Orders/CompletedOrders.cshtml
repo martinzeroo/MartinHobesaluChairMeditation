@@ -1,0 +1,13 @@
+﻿@model MartinHobesaluChairMeditation.Models.ViewModels.CompletedOrdersViewModel
+
+@{
+    ViewData["Title"] = "Show Stats";
+    Order first = Model.CompletedOrders.FirstOrDefault()??
+    new Order();
+}
+<h1>You have <i>@(Model.TotalOrders - Model.TotalCompletedOrders)</i> uncompleted order! </h1>
+
+<h2>Completed Orders</h2>
+
+<partial name="_CompletedOrdersViewModel" model="Model.CompletedOrders" />
+
