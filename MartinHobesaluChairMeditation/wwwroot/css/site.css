@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+.navbar, footer {
+    background-image: url("https://static.vitra.com/media-resized/lT28qidxkHKG31--fZPOGl7urEVi9N5Y_qiP8Twsahg/fill/1024/676/ce/0/aHR0cHM6Ly9zdGF0aWMudml0cmEuY29tL21lZGlhL2Fzc2V0LzY4MTI4Mzcvc3RvcmFnZS92X2Z1bGxibGVlZF8xNDQweC83NjM0NzUxOS5qcGc.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.logo {
+    width: 60px;
+}
