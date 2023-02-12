@@ -44,7 +44,7 @@ namespace MartinHobesaluChairMeditation.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChairMeditation");
+                    b.ToTable("ChairMeditation", (string)null);
                 });
 
             modelBuilder.Entity("MartinHobesaluChairMeditation.Models.Order", b =>
@@ -76,7 +76,7 @@ namespace MartinHobesaluChairMeditation.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Order");
+                    b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -21,6 +21,12 @@ namespace MartinHobesaluChairMeditation.Controllers
             _context = context;
         }
 
+        // GET: Orders
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Order.ToListAsync());
+        }
+
         [Authorize]
         public async Task<IActionResult> CompletedAmount()
         {
@@ -87,7 +93,8 @@ namespace MartinHobesaluChairMeditation.Controllers
             return View(order);
         }
 
-        public IActionResult OrderCreate()
+        // GET: Orders/Create
+        public IActionResult Create()
         {
             return View();
         }
@@ -97,12 +104,34 @@ namespace MartinHobesaluChairMeditation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> OrderCreate([Bind("Id,Tone,CompletedAmount,OrderAmount,TimeOfArrival,Price")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,Tone,OrderAmount,TimeOfArrival,Price")] Order order)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(order);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(order);
+        }
+
+        [Authorize]
+        public IActionResult OrderCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> OrderCreate([Bind("Id,OrdererName,Tone,CompletedAmount,OrderAmount,TimeOfArrival,Price")] Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(order);
+                order.TimeOfArrival = DateTime.Now.AddDays(7);
+                order.Price = order.OrderAmount * 21;
+                await _context.SaveChangesAsync();
                 await _context.SaveChangesAsync();
                 return View("ThankYou");
             }

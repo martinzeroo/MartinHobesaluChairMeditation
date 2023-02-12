@@ -17,6 +17,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.CompletedAmount)
             </th>
+            @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+            {
+               <th>
+                   Toole teha veel
+               </th>
+            }
+
             <th></th>
         </tr>
     </thead>
@@ -32,6 +39,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CompletedAmount)
             </td>
+            @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                           {
+                            <td>
+                                @(item.OrderAmount - item.CompletedAmount)
+                            </td>
+                            }
         </tr>
 }
     </tbody>

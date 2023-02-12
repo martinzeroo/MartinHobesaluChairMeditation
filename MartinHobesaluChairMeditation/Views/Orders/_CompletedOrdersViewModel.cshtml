@@ -3,9 +3,12 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+            {
+               <th>
                 @Html.DisplayNameFor(model => model.OrdererName)
             </th>
+            }
             <th>
                 @Html.DisplayNameFor(model => model.Tone)
             </th>
@@ -27,9 +30,12 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+            {
+               <th>
                 @Html.DisplayFor(modelItem => item.OrdererName)
-            </td>
+            </th>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Tone)
             </td>
