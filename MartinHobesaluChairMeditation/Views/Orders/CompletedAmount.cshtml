@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.OrdererName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Tone)
             </th>
             <th>
@@ -33,6 +36,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrdererName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tone)
             </td>

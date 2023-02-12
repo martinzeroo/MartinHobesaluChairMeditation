@@ -4,7 +4,7 @@
     ViewData["Title"] = "OrderCreate";
 }
 
-<h1>OrdersCreate</h1>
+<h1>Create Order</h1>
 
 <h4>Order</h4>
 <hr />
@@ -12,6 +12,11 @@
     <div class="col-md-4">
         <form asp-action="OrderCreate">
             <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <input asp-for="OrdererName" class="form-control" hidden value="@User.Identity.Name"/>
+                <span asp-validation-for="OrdererName" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Tone" class="control-label"></label>
                 <input asp-for="Tone" class="form-control" />
@@ -22,7 +27,7 @@
                 <input asp-for="OrderAmount" class="form-control" />
                 <span asp-validation-for="OrderAmount" class="text-danger"></span>
             </div>
-            <div class="form-group">
+@*            <div class="form-group">
                 <label asp-for="TimeOfArrival" class="control-label"></label>
                 <input asp-for="TimeOfArrival" class="form-control" />
                 <span asp-validation-for="TimeOfArrival" class="text-danger"></span>
@@ -31,7 +36,7 @@
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

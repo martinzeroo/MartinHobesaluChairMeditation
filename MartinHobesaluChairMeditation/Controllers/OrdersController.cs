@@ -97,18 +97,19 @@ namespace MartinHobesaluChairMeditation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> OrderCreate([Bind("Id,Tone,CompletedAmount,OrderAmount,TimeOfArrival,Price")] Order order)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(CompletedAmount));
+                return View("ThankYou");
             }
             return View(order);
         }
+
         [Authorize]
-        
         public async Task<IActionResult> IncreaseCompletedAmount(int id)
         {
             var order = _context.Order.FirstOrDefault(x => x.Id == id);

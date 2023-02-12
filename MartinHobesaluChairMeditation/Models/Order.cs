@@ -6,6 +6,10 @@ namespace MartinHobesaluChairMeditation.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "Orderer Name")]
+        [DisplayFormat(NullDisplayText = "Anonymous")]
+        [StringLength(40)]
+        public string? OrdererName { get; set; }
         public string? Tone { get; set; }
         [Display(Name = "Completed Amount")]
         public int CompletedAmount { get; set; } = 0;
