@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Table Status";
+    int AmountLeft = 0;
+
 }
 
 <h1>Table Status</h1>
@@ -41,11 +43,20 @@
             </td>
             @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                            {
-                            <td>
+                               <td>
                                 @(item.OrderAmount - item.CompletedAmount)
-                            </td>
+                        @{
+                            AmountLeft += item.OrderAmount - item.CompletedAmount;
+                        }
+                        </td>
                             }
         </tr>
 }
     </tbody>
 </table>
+
+@if (ViewContext.HttpContext.User.IsInRole("Admin"))
+{
+    <a>How many left to complete: @AmountLeft orders</a>
+}
+
